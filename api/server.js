@@ -3,7 +3,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 const db = require('./data/db-config')
 
-// const plantsRouter = require('./plants/plants-router')
+const plantsRouter = require('./plants/plants-router')
 const authRouter = require('./auth/auth-router')
 const usersRouter = require('./users/users-router')
 
@@ -23,7 +23,7 @@ server.use(cors())
 
 server.use('/api/users', usersRouter)
 server.use('/api/auth', authRouter )
-// server.use('/api/plants', plantsRouter )
+server.use('/api/plants', plantsRouter )
 
 
 server.use((err, req, res, next) => { // eslint-disable-line
