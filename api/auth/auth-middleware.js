@@ -47,7 +47,7 @@ const checkUsernameExists = async (req, res, next) => {
    const { username, password } = req.body;
    try {
       if (!username || !password) {
-         return next({ status: 400, message: 'username and password required' });
+         return next({ status: 400, message: 'Please enter a username and password' });
       }
       const [dbUsername] = await User.findBy({ username });
       if (!dbUsername) {
