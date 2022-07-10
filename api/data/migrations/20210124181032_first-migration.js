@@ -10,7 +10,7 @@ exports.up = async (knex) => {
     .createTable('genus', tbl => {
       tbl.increments('genus_id')
       tbl.string('genus_name').notNullable().unique()
-      tbl.string('genus_habitat').notNullable()
+      // tbl.string('genus_habitat').notNullable()
       tbl.float('genus_water_frequency').notNullable()
     })
 
