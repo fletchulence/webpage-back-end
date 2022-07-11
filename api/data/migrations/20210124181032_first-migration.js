@@ -1,10 +1,21 @@
 exports.up = async (knex) => {
   await knex.schema
+    .createTable('roles', (tbl) => {
+      tbl.increments('role_id')
+      tbl.string('role_name').notNullable().unique()
+    })
+
     .createTable('users', (tbl) => {
       tbl.increments('user_id')
       tbl.string('username', 200).notNullable().unique()
       tbl.string('password', 200).notNullable()
       tbl.timestamps(false, true)
+      tbl.integer('role_id')
+        .unsigned()
+        .notNullable()
+        .references('role_id').inTable('roles')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
     })
 
     .createTable('genus', tbl => {
@@ -18,7 +29,6 @@ exports.up = async (knex) => {
       tbl.increments('plant_id')
       tbl.string('plant_name').notNullable().unique()
       tbl.string('plant_nickname').notNullable().unique()
-      // tbl.integer('plant_water_frequency')
       tbl.boolean('water_now').defaultTo(false)
       tbl.float('plant_picture')
       tbl.integer('genus_id')
@@ -52,4 +62,5 @@ exports.down = async (knex) => {
   await knex.schema.dropTableIfExists('plants')
   await knex.schema.dropTableIfExists('genus')
   await knex.schema.dropTableIfExists('users')
+  await knex.schema.dropTableIfExists('roles')
 }
