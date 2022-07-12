@@ -18,17 +18,17 @@ exports.up = async (knex) => {
       .onUpdate('RESTRICT')
     })
     
-    // .createTable('companies', (tbl) =>{
-    //   tbl.increments('companies_id')
-    //   tbl.string('companies_name').notNullable().unique()
-    //   tbl.string('companies_person_name').defaultTo('')
-    //   tbl.integer('user_id')
-    //   .unsigned()
-    //   .notNullable()
-    //   .references('user_id').inTable('users')
-    //   .onDelete('RESTRICT')
-    //   .onUpdate('RESTRICT')
-    // })
+    .createTable('companies', (tbl) =>{
+      tbl.increments('companies_id')
+      tbl.string('companies_name').notNullable().unique()
+      tbl.string('companies_person_name').defaultTo('')
+      tbl.integer('user_id')
+      .unsigned()
+      .notNullable()
+      .references('user_id').inTable('users')
+      .onDelete('RESTRICT')
+      .onUpdate('RESTRICT')
+    })
 
     .createTable('genus', tbl => {
       tbl.increments('genus_id')
