@@ -3,9 +3,11 @@ const helmet = require('helmet')
 const cors = require('cors')
 const db = require('./data/db-config')
 
-const plantsRouter = require('./plants/plants-router')
+// const plantsRouter = require('./plants/plants-router')
 const authRouter = require('./auth/auth-router')
 const usersRouter = require('./components/users/users-router')
+// const calendarRouter = require('./components/calendar/calendar-router')
+// const tanksRouter = require('./components/fish/fish-router')
 
 
 const server = express()
@@ -15,7 +17,7 @@ server.use(cors())
 
 server.use('/api/users', usersRouter)
 server.use('/api/auth', authRouter )
-server.use('/api/plants', plantsRouter )
+// server.use('/api/plants', plantsRouter )
 // server.use('/api/fish', fishRouter)
 // server.use('/api/calendar', calendarRouter)
 
