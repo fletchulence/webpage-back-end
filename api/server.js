@@ -5,7 +5,7 @@ const db = require('./data/db-config')
 
 const authRouter = require('./auth/auth-router')
 const usersRouter = require('./components/users/users-router')
-// const likesRouter = require('./likes/likes-router')
+// const projectsRouter = require('./projects/projects-router')
 // const fed_historyRouter = require('./components/fed_history/fed_history-router')
 // const fishtanksRouter = require('./components/fishtanks/fishtanks-router')
 
@@ -17,7 +17,7 @@ server.use(cors())
 
 server.use('/api/users', usersRouter)
 server.use('/api/auth', authRouter )
-// server.use('/api/likes', likesRouter )
+// server.use('/api/projects', projectsRouter )
 // server.use('/api/fishtanks', fishtanksRouter)
 // server.use('/api/fed_history', fed_historyRouter)
 

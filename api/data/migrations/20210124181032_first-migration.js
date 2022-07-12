@@ -29,25 +29,28 @@ exports.up = async (knex) => {
       .references('role_id').inTable('roles')
       .onDelete('RESTRICT')
       .onUpdate('RESTRICT')
+    })
+    
+    .createTable('companies_users', (tbl) =>{
+      tbl.increments('companies_users_id')
+      tbl.integer('company_id')
+      .unsigned()
+      .notNullable()
+      .references('company_id').inTable('companies')
+      .onDelete('RESTRICT')
+      .onUpdate('RESTRICT')
       tbl.integer('user_id')
       .unsigned()
+      .notNullable()
       .references('user_id').inTable('users')
       .onDelete('RESTRICT')
       .onUpdate('RESTRICT')
     })
-    
-    .createTable('likes', tbl => {
-      tbl.increments('likes_id')
-      tbl.integer('user_id')
-        .unsigned()
-        .references('user_id').inTable('users')
-        .onDelete('RESTRICT')
-        .onUpdate('RESTRICT')
-      tbl.integer('companies_id')
-        .unsigned()
-        .references('companies_id').inTable('companies')
-        .onDelete('RESTRICT')
-        .onUpdate('RESTRICT')
+
+    .createTable('projects', tbl => {
+      tbl.increments('project_id')
+      tbl.integer('project_likes')
+      tbl.integer('project_contents')
     })
     
     
@@ -72,7 +75,7 @@ exports.up = async (knex) => {
 }
 
 exports.down = async (knex) => {
-  await knex.schema.dropTableIfExists('likes')
+  await knex.schema.dropTableIfExists('projects')
   await knex.schema.dropTableIfExists('companies')
   await knex.schema.dropTableIfExists('users')
   await knex.schema.dropTableIfExists('roles')
