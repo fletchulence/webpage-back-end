@@ -21,10 +21,12 @@ const checkUnusedUsername = async (req, res, next) => {
       next(err);
    }
 };
+
+// to hash the password
 const hashPass = async (req, res, next) => {
    let { password } = req.user;
    const hash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
-   console.log(hash)
+
    try {
       req.user.password = hash;
       next();
@@ -76,6 +78,22 @@ const checkPassword = async (req, res, next) => {
       next(err);
    }
 };
+
+// const checkToken = async (req, res, next) => {
+//    const { password } = req.body;
+//    const userPass = await User.getById(req.user.user_id);
+//    try {
+//       if (userPass && bcrypt.compareSync(password, userPass.password)) {
+//          req.user.token = tokenBuilder(userPass);
+//          // req.user = userPass;
+//          next();
+//       } else {
+//          next({ status: 412, message: 'invalid credentials' });
+//       }
+//    } catch (err) {
+//       next(err);
+//    }
+// };
 
 
 

@@ -8,7 +8,11 @@ const {
   hashPass
 } = require('./auth-middleware');
 
-router.post('/register', checkUnusedUsername, hashPass, async (req, res, next) => {
+const {
+  verifyPayload
+} = require('./../components/users/users-middleware')
+
+router.post('/register', checkUnusedUsername, hashPass, verifyPayload, async (req, res, next) => {
   /*
   IMPLEMENT
   You are welcome to build additional middlewares to help with the endpoint's functionality.
