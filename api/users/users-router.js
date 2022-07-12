@@ -23,7 +23,7 @@ router.get('/:user_id', async (req, res, next) => {
    }
 })
 
-router.post('/', /* checkUnusedUsername, verifyPayload, */ async (req, res, next) => {
+router.post('/', checkUnusedUsername, /* verifyPayload, */ async (req, res, next) => {
    let user = req.body
 
    res.status(201).json(await User.insertUser(user))
