@@ -11,12 +11,24 @@ exports.up = async (knex) => {
       tbl.string('password', 200).notNullable()
       tbl.timestamps(false, true)
       tbl.integer('role_id')
-        .unsigned()
-        .notNullable()
-        .references('role_id').inTable('roles')
-        .onDelete('RESTRICT')
-        .onUpdate('RESTRICT')
+      .unsigned()
+      .notNullable()
+      .references('role_id').inTable('roles')
+      .onDelete('RESTRICT')
+      .onUpdate('RESTRICT')
     })
+    
+    // .createTable('companies', (tbl) =>{
+    //   tbl.increments('companies_id')
+    //   tbl.string('companies_name').notNullable().unique()
+    //   tbl.string('companies_person_name').defaultTo('')
+    //   tbl.integer('user_id')
+    //   .unsigned()
+    //   .notNullable()
+    //   .references('user_id').inTable('users')
+    //   .onDelete('RESTRICT')
+    //   .onUpdate('RESTRICT')
+    // })
 
     .createTable('genus', tbl => {
       tbl.increments('genus_id')
@@ -55,6 +67,24 @@ exports.up = async (knex) => {
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
     })
+
+    //! use for the relationship between company and user
+    // .createTable('users_company', tbl => {
+    //   tbl.increments('users_company_id')
+    //   tbl.string('users_company_person').defaultTo( 'New User from' + 'users_company_name' + `${Math.round(Math.random() * 10)}` )
+    //   tbl.integer('user_id')
+    //     .unsigned()
+    //     .notNullable()
+    //     .references('user_id').inTable('users')
+    //     .onDelete('RESTRICT')
+    //     .onUpdate('RESTRICT')
+    //   tbl.integer('companies_id')
+    //     .unsigned()
+    //     .notNullable()
+    //     .references('companies_id').inTable('companies')
+    //     .onDelete('RESTRICT')
+    //     .onUpdate('RESTRICT')
+    // })
 }
 
 exports.down = async (knex) => {
