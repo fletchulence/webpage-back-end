@@ -21,52 +21,36 @@ exports.up = async (knex) => {
     .createTable('companies', (tbl) =>{
       tbl.increments('companies_id')
       tbl.string('companies_name').notNullable().unique()
-      tbl.string('companies_person_name').defaultTo('')
-      tbl.integer('user_id')
+      tbl.string('companies_person_name').defaultTo('Recruiter Name')
+      tbl.integer('role_id')
       .unsigned()
       .notNullable()
+      .defaultTo(3)
+      .references('role_id').inTable('roles')
+      .onDelete('RESTRICT')
+      .onUpdate('RESTRICT')
+      tbl.integer('user_id')
+      .unsigned()
       .references('user_id').inTable('users')
       .onDelete('RESTRICT')
       .onUpdate('RESTRICT')
     })
-
-    .createTable('genus', tbl => {
-      tbl.increments('genus_id')
-      tbl.string('genus_name').notNullable().unique()
-      // tbl.string('genus_habitat').notNullable()
-      tbl.float('genus_water_frequency').notNullable()
-    })
-
-    .createTable('plants', (tbl) => {
-      tbl.increments('plant_id')
-      tbl.string('plant_name').notNullable().unique()
-      tbl.string('plant_nickname').notNullable().unique()
-      tbl.boolean('water_now').defaultTo(false)
-      tbl.float('plant_picture')
-      tbl.integer('genus_id')
-        .unsigned()
-        .notNullable()
-        .references('genus_id').inTable('genus')
-        .onDelete('RESTRICT')
-        .onUpdate('RESTRICT')
-    })
-
-    .createTable('users_plants', tbl => {
-      tbl.increments('users_plants_id')
-      tbl.string('users_plants_nickname').defaultTo( 'New Plant' + `${Math.round(Math.random() * 10)}` )
-      tbl.integer('plant_id')
-        .unsigned()
-        .notNullable()
-        .references('plant_id').inTable('plants')
-        .onDelete('RESTRICT')
-        .onUpdate('RESTRICT')
+    
+    .createTable('likes', tbl => {
+      tbl.increments('likes_id')
       tbl.integer('user_id')
         .unsigned()
-        .notNullable()
         .references('user_id').inTable('users')
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
+      tbl.integer('companies_id')
+        .unsigned()
+        .references('companies_id').inTable('companies')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
     })
+    
+    
 
     //! use for the relationship between company and user
     // .createTable('users_company', tbl => {
@@ -88,9 +72,8 @@ exports.up = async (knex) => {
 }
 
 exports.down = async (knex) => {
-  await knex.schema.dropTableIfExists('users_plants')
-  await knex.schema.dropTableIfExists('plants')
-  await knex.schema.dropTableIfExists('genus')
+  await knex.schema.dropTableIfExists('likes')
+  await knex.schema.dropTableIfExists('companies')
   await knex.schema.dropTableIfExists('users')
   await knex.schema.dropTableIfExists('roles')
 }
