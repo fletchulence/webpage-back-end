@@ -5,7 +5,8 @@ const { BCRYPT_ROUNDS } = require("./../../secrets") // use this secret!
 
 // MIDDLEWARE
 const {
-   checkUnusedUsername
+   checkUnusedUsername,
+   hashPass
 } = require('./../../auth/auth-middleware')
 
 // const { verifyPayload } = require('./')
@@ -23,10 +24,8 @@ router.get('/:user_id', async (req, res, next) => {
    }
 })
 
-router.post('/', checkUnusedUsername, /* verifyPayload, */ async (req, res, next) => {
-   let user = req.body
+// router.put('/:username', async (req, res, next) =>{
 
-   res.status(201).json(await User.insertUser(user))
-})
+// })
 
 module.exports = router
