@@ -24,16 +24,25 @@ function findBy(filter) {
       .where(filter);
 }
 
-// async function insert(user) {
-//    const [id] = await db('users').insert(user);
-
-//    return getById(id);
-// }
+async function insert(user) {
+   const [ newUserObj ] = await db("users").insert(
+      {
+         username: user.username,
+         password: user.password,
+         role_id: user.role_id ? user.role_id : 1 , //! trying to fix errs
+      }, [
+        'username', 
+        'password', 
+        'role_id' //! trying to fix errors
+       ]
+    ).orderBy("users.role_id")
+   return newUserObj
+}
 
 module.exports = {
    getAllUsers,
    getById,
-   // insert,
+   insert,
    findBy,
    insertUser
 }
