@@ -3,11 +3,11 @@ const helmet = require('helmet')
 const cors = require('cors')
 const db = require('./data/db-config')
 
-// const plantsRouter = require('./plants/plants-router')
 const authRouter = require('./auth/auth-router')
 const usersRouter = require('./components/users/users-router')
-// const calendarRouter = require('./components/calendar/calendar-router')
-// const tanksRouter = require('./components/fish/fish-router')
+// const likesRouter = require('./likes/likes-router')
+// const fed_historyRouter = require('./components/fed_history/fed_history-router')
+// const fishtanksRouter = require('./components/fishtanks/fishtanks-router')
 
 
 const server = express()
@@ -17,9 +17,9 @@ server.use(cors())
 
 server.use('/api/users', usersRouter)
 server.use('/api/auth', authRouter )
-// server.use('/api/plants', plantsRouter )
-// server.use('/api/fish', fishRouter)
-// server.use('/api/calendar', calendarRouter)
+// server.use('/api/likes', likesRouter )
+// server.use('/api/fishtanks', fishtanksRouter)
+// server.use('/api/fed_history', fed_historyRouter)
 
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
