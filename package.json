@@ -16,10 +16,11 @@
     "deploy": "git push heroku main"
   },
   "engines": {
-    "node": "16.13.2"
+    "node": "v18.5.0"
   },
   "license": "ISC",
   "dependencies": {
+    "@jest/globals": "^28.1.2",
     "bcryptjs": "^2.4.3",
     "cors": "2.8.5",
     "dotenv": "14.3.0",
@@ -33,7 +34,8 @@
   "devDependencies": {
     "@types/jest": "27.4.0",
     "cross-env": "7.0.3",
-    "eslint": "8.7.0",
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.30.1",
     "jest": "27.4.7",
     "nodemon": "2.0.15",
     "supertest": "6.2.2"
