@@ -5,7 +5,7 @@ const db = require('./data/db-config')
 
 const plantsRouter = require('./plants/plants-router')
 const authRouter = require('./auth/auth-router')
-const usersRouter = require('./users/users-router')
+const usersRouter = require('./components/users/users-router')
 
 
 const server = express()

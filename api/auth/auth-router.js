@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('./../users/users-model');
+const User = require('./../components/users/users-model');
 
 const {
   checkUsernameExists,

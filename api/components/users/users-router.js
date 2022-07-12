@@ -1,12 +1,12 @@
 const router = require('express').Router()
 const User = require('./users-model')
 const bcrypt = require("bcryptjs")
-const { BCRYPT_ROUNDS } = require("../secrets") // use this secret!
+const { BCRYPT_ROUNDS } = require("./../../secrets") // use this secret!
 
 // MIDDLEWARE
 const {
    checkUnusedUsername
-} = require('../auth/auth-middleware')
+} = require('./../../auth/auth-middleware')
 
 // const { verifyPayload } = require('./')
 
