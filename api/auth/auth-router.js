@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const User = require('./../components/users/users-model');
+// const Company = require('./../components/companies/companies-model');
 
 const {
   checkUsernameExists,
   checkUnusedUsername,
   checkPassword,
-  hashPass
+  hashPass,
+  checkToken
 } = require('./auth-middleware');
 
 const {
@@ -40,14 +42,18 @@ router.post('/register', checkUnusedUsername, hashPass, verifyPayload, async (re
   */
 
   try {
-    res.json(await User.insertUser(req.user));
+    res.json(await User.add(req.user));
   } catch (err) {
     next(err);
   }
 
 });
 
-router.post('/login', checkUsernameExists, checkPassword, (req, res, next) => {
+router.post('/login', 
+  checkUsernameExists, 
+  checkPassword, 
+  checkToken,
+  (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
