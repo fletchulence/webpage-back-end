@@ -79,21 +79,21 @@ const checkPassword = async (req, res, next) => {
    }
 };
 
-// const checkToken = async (req, res, next) => {
-//    const { password } = req.body;
-//    const userPass = await User.getById(req.user.user_id);
-//    try {
-//       if (userPass && bcrypt.compareSync(password, userPass.password)) {
-//          req.user.token = tokenBuilder(userPass);
-//          // req.user = userPass;
-//          next();
-//       } else {
-//          next({ status: 412, message: 'invalid credentials' });
-//       }
-//    } catch (err) {
-//       next(err);
-//    }
-// };
+const checkToken = async (req, res, next) => {
+   const { password } = req.body;
+   const userPass = await User.getById(req.user.user_id);
+   try {
+      if (userPass && bcrypt.compareSync(password, userPass.password)) {
+         req.user.token = tokenBuilder(userPass);
+         // req.user = userPass;
+         next();
+      } else {
+         next({ status: 412, message: 'invalid credentials' });
+      }
+   } catch (err) {
+      next(err);
+   }
+};
 
 
 
@@ -102,5 +102,6 @@ module.exports = {
    checkUsernameExists,
    checkUnusedUsername,
    checkPassword,
+   checkToken,
    hashPass
 };
