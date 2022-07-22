@@ -24,7 +24,7 @@ function findBy(filter) {
       .where(filter);
 }
 
-async function insert(user) {
+async function add(user) {
    const [ newUserObj ] = await db("users").insert(
       {
          username: user.username,
@@ -42,7 +42,7 @@ async function insert(user) {
 module.exports = {
    getAllUsers,
    getById,
-   insert,
+   add,
    findBy,
    insertUser
 }
