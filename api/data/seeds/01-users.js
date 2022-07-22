@@ -12,8 +12,14 @@ exports.seed = function(knex) {
         { role_id: 2, username: 'sara', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
         { role_id: 2, username: 'debra', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
         { role_id: 2, username: 'fletcher', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
-        { role_id: 3, username: 'MS', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
-        { role_id: 3, username: 'JPMC', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        /* 5 */{ role_id: 3, username: 'Chewy-Amanda', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        /* 6 */{ role_id: 3, username: 'Chewy-Alan', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        /* 7 */{ role_id: 3, username: 'Chewy-Audrey', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        { role_id: 3, username: 'Tesla-Jimmy', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        { role_id: 3, username: 'Tesla-Bob', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        { role_id: 3, username: 'MS-Bob', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        { role_id: 3, username: 'MS-Robert', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
+        { role_id: 3, username: 'JPMC-Angie', password: '$2a$08$dyA1S.XdgJYbzu8XxIHVdORRN5jbcPc1hgKRlZsta2Hr93lh34TKy' },
       ]);
     });
 };

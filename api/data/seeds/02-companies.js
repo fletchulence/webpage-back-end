@@ -8,13 +8,15 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('companies').insert([
-        { companies_name: 'Chewy'  },
-        { companies_name: 'Morgan Stanley' },
-        { companies_name: 'Tesla'},
-        { companies_name: 'Apple' || "Apple Inc"},
-        { companies_name: 'JP Morgan'},
-        { companies_name: 'JPMC'},
-        { companies_name: 'Blue Origin'},
+        { company_name: 'Chewy', company_password: '123abc' },
+        { company_name: 'Morgan Stanley', company_password: '123abc' },
+        { company_name: 'Tesla', company_password: '123abc' },
+        { company_name: 'Apple', company_password: '123abc' },
+        { company_name: 'Facebook', company_password: '123abc' },
+        { company_name: 'JPMC', company_password: '123abc' },
+        { company_name: 'Blue Origin', company_password: '123abc' },
+        { company_name: 'Home Depot', company_password: '123abc' },
+        { company_name: 'Motorola', company_password: '123abc' },
       ]);
     });
 };

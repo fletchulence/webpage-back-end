@@ -19,9 +19,9 @@ exports.up = async (knex) => {
     })
     
     .createTable('companies', (tbl) =>{
-      tbl.increments('companies_id')
-      tbl.string('companies_name').notNullable().unique()
-      tbl.string('companies_person_name').defaultTo('Recruiter Name')
+      tbl.increments('company_id')
+      tbl.string('company_name').notNullable().unique()
+      tbl.string('company_password').notNullable()
       tbl.integer('role_id')
       .unsigned()
       .notNullable()
@@ -49,10 +49,10 @@ exports.up = async (knex) => {
 
     .createTable('projects', tbl => {
       tbl.increments('project_id')
+      tbl.string('project_name').notNullable().unique()
       tbl.integer('project_likes')
-      tbl.integer('project_contents')
+      tbl.text('project_content')
     })
-    
     
 
     //! use for the relationship between company and user
@@ -76,6 +76,7 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
   await knex.schema.dropTableIfExists('projects')
+  await knex.schema.dropTableIfExists('companies_users')
   await knex.schema.dropTableIfExists('companies')
   await knex.schema.dropTableIfExists('users')
   await knex.schema.dropTableIfExists('roles')
