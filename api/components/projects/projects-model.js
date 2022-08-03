@@ -2,9 +2,6 @@ const db = require('./../../data/db-config')
 
 function getAllProjects() { return db('projects') }
 
-
-
-
 // async function getLikesById(likes) { 
 //    const rows = await db('companies_users as cu')
 //       .join('users as u', 'u.user_id', 'cu.user_id')
@@ -41,8 +38,8 @@ function getById(project_id) {
 function getLikesById(project_id) {
    return db('projects')
       .where({ project_id })
-      .first()
-      // .select("projects.project_likes")
+      // .first()
+      .select("projects.project_likes")
 
    // await find(project_id, 'project_likes')
    // // let likes = await find(project_id, 'project_likes') 
@@ -64,10 +61,11 @@ function getLikesById(project_id) {
 
 async function updateProject(project_id, changes){
    await db('projects')
+      .update(changes)
       .where({ project_id })
-      .update(changes, "projects.project_likes")
      
-   return getById(project_id)
+   const updated = getById(project_id)
+   return updated
 }
 
 

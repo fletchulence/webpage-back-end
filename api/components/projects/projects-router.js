@@ -31,17 +31,17 @@ router.get('/:project_id/likes', async (req, res, next) => {
 })
 
 // updateLikes
-router.put('/:project_id/likes', 
+router.put('/:project_id', 
    checkBody, 
-   checkLikesChanged,
+   // checkLikesChanged,
    async (req, res, next) =>{
-   // const { project_likes } = req.body
-   const { project_id } = req.params
+   let { likeNum, id } = req.body
+   // const { project_id } = req.params
    // let newNumber = req.newLikeNumber
+   const updatedProject = await Project.updateProject(req.params.project_id, req.body)
    try{
       // console.log(newNumber)
-      const updatedProject = await Project.updateProject(project_id, req.body)
-      res.json(updatedProject)
+      res.status(200).json(updatedProject)
    } catch (err){
       next(err)
    }

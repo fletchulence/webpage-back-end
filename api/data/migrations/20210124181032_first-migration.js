@@ -49,8 +49,8 @@ exports.up = async (knex) => {
 
     .createTable('projects', tbl => {
       tbl.increments('project_id')
-      tbl.string('project_name').notNullable().unique()
-      tbl.integer('project_likes')
+      tbl.string('project_name').unique()
+      tbl.integer('project_likes').notNullable()
       tbl.text('project_content')
     })
     

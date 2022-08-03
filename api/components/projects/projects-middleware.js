@@ -1,57 +1,42 @@
 const Project = require('./projects-model')
 
-function checkBody (req, res, next) {
-   const { project_likes, project_id } = req.body
-   // console.log(req.bo÷dy)
-   const id = req.params.project_id
-   // let updates = { id: req.body.project_id , likes: req.project_likes }
+async function checkBody (config, req, res, next) {
+   // const { project_likes, project_id } = req.body
+   const {project_likes, project_id} = req.params
+   const proj = await Project.getById(project_id) 
    try {
-      Project.getById(req.params.project_id) 
-      
-      if (!project_likes){
-         next({ message: 'where are your likes'})
-      } else if (!project_id){
-         next({ message: 'where are your project_id'})
-      } 
-      // else {
-      //    next()
-      // }
-      
-      // should check separately
-      if ( id != req.body.project_id ){
-         console.log('you are adding to the wrong id', '||   id=', id, '||   project_id=', project_id )
+      // if (proj.project_id !== project_id){
+      //    next({ status: 404, message: `projId's are not equal -> ${proj.project_id} != ${project_id}`})
+      // } else if (!proj.project_likes)
+      if (!project_id || !proj){
+         next({ status: 404, message: `Cant update. This is not a project_id ${project_id}`})
       } else {
-         req.likes = project_likes
+         res.json(proj)
+         req.projectBody = proj
          next()
       }
-
-      // if ( project_id != updates.id ) {
-      //    console.log('the heck you tryna do', db_info, updates)
-      // } else {
-      //    let diff = db_info.project_likes - updates.likes  
-      //       res.json({ diff: diff, message: 'you added to likes?' })
-      // }
    } catch(err) {
-         console.error(err.message)
+      console.error(err.message)
    }
-      // console.log()
-   // }
-   // if ( current.likes != updates.likes ){
-   //    next({ totalLikes: current.likes + 1 })
-   // }
 }
 
 async function checkLikesChanged(req, res, next){
-   // const { likes } = req.body
+   let object = req.projectBody
+   
+
+   const { likes } = req.body
+   console.log(likes)
    // let newLike = false
-   const dbLikes = await Project.getById(req.params.project_id)
+   let dbLikes = Project.getById(req.params.project_id)
+   console.log(dbLikes)
    if ( req.likes > dbLikes.project_likes){
-      req.newLike = true
+      req.newLike = true 
       // req.newLikeNumber = dbLikes.project_likes + 1 
-      next({ message: `you've added a like!`})
+      next({ status: 400, message: `you've added a like!`})
    } else (
-      next({ message: 'likes are the same'})
+      next({ status: 404, message: 'likes are the same'})
    )
+   next()
 
    // if ( id != req.body.project_id ){
    //    console.log('you are adding to the wrong id', '||   id=', id, '||   project_id=', project_id )
