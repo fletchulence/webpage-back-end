@@ -119,4 +119,4 @@ dist
 .DS_Store
 *.db3
 
-./api/secrets
+*.secrets
