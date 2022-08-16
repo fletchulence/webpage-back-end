@@ -39,7 +39,8 @@ async function add(user) {
    return newUserObj
 }
 
-async function update(user_id, changes){
+async function updateUser (user_id, changes){
+   // const [ updatedUser ] = await db('users').update(user_id, changes )
    await db('users')
       .update(changes)
       .where({ user_id })
@@ -52,7 +53,7 @@ module.exports = {
    getAllUsers,
    getById,
    add,
-   update,
+   updateUser,
    findBy,
    insertUser
 }

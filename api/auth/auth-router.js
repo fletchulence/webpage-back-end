@@ -3,6 +3,11 @@ const User = require('./../components/users/users-model');
 // const Company = require('./../components/companies/companies-model');
 
 const {
+  restricted,
+  checkRole
+} = require('../secrets/decode')
+
+const {
   checkUsernameExists,
   checkUnusedUsername,
   checkPassword,
@@ -56,8 +61,7 @@ async (req, res, next) => {
 
 router.post('/login', 
   checkUsernameExists, 
-  checkPassword, 
-  checkToken,
+  checkPassword,
   (req, res, next) => {
   /*
     IMPLEMENT
@@ -93,15 +97,18 @@ router.post('/login',
 
 
 router.put('/:user_id/info',
-// checkToken,
+restricted,
+// checkToken
+
 // rehashPass,
 async (req, res, next) =>{
   const { user_id } = req.params
-  const [ changes ] = req.body;
+  const changes = req.body;
+  console.log(req.decodedJwt.subject)
   try {
-    console.log(user_id)
+    // console.log(user_id)
     console.log(changes)
-    res.status(301).json( await User.update(user_id, changes))
+    res.status(301).json( await User.updateUser(req.decodedJwt.subject, changes))
   } catch (err){
     next(err)
   }
