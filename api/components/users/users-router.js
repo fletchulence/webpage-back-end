@@ -1,7 +1,5 @@
 const router = require('express').Router()
 const User = require('./users-model')
-const bcrypt = require("bcryptjs")
-const { BCRYPT_ROUNDS } = require("./../../secrets") // use this secret!
 
 // MIDDLEWARE
 // const {
@@ -24,8 +22,6 @@ router.get('/:user_id', async (req, res, next) => {
    }
 })
 
-// router.put('/:username', async (req, res, next) =>{
 
-// })
 
 module.exports = router

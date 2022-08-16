@@ -3,10 +3,16 @@ const User = require('./../components/users/users-model');
 // const Company = require('./../components/companies/companies-model');
 
 const {
+  restricted,
+  checkRole
+} = require('../secrets/decode')
+
+const {
   checkUsernameExists,
   checkUnusedUsername,
   checkPassword,
   hashPass,
+  rehashPass,
   checkToken
 } = require('./auth-middleware');
 
@@ -14,7 +20,11 @@ const {
   verifyPayload
 } = require('./../components/users/users-middleware')
 
-router.post('/register', checkUnusedUsername, hashPass, verifyPayload, async (req, res, next) => {
+router.post('/register', 
+checkUnusedUsername, 
+hashPass, 
+verifyPayload, 
+async (req, res, next) => {
   /*
   IMPLEMENT
   You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -51,8 +61,7 @@ router.post('/register', checkUnusedUsername, hashPass, verifyPayload, async (re
 
 router.post('/login', 
   checkUsernameExists, 
-  checkPassword, 
-  checkToken,
+  checkPassword,
   (req, res, next) => {
   /*
     IMPLEMENT
@@ -83,7 +92,27 @@ router.post('/login',
   } catch (err) {
     next(err);
   }
-
+  
 });
+
+
+router.put('/:user_id/info',
+restricted,
+// checkToken
+
+// rehashPass,
+async (req, res, next) =>{
+  const { user_id } = req.params
+  const changes = req.body;
+  console.log(req.decodedJwt.subject)
+  try {
+    // console.log(user_id)
+    console.log(changes)
+    res.status(301).json( await User.updateUser(req.decodedJwt.subject, changes))
+  } catch (err){
+    next(err)
+  }
+
+})
 
 module.exports = router;
