@@ -29,20 +29,30 @@ async function add(user) {
       {
          username: user.username,
          password: user.password,
-         role_id: user.role_id ? user.role_id : 1 , //! trying to fix errs
+         role_id: user.role_id ? user.role_id : 3 , 
       }, [
         'username', 
         'password', 
-        'role_id' //! trying to fix errors
+        'role_id'
        ]
     ).orderBy("users.role_id")
    return newUserObj
+}
+
+async function update(user_id, changes){
+   await db('users')
+      .update(changes)
+      .where({ user_id })
+     
+   const updated = getById(user_id)
+   return updated
 }
 
 module.exports = {
    getAllUsers,
    getById,
    add,
+   update,
    findBy,
    insertUser
 }
