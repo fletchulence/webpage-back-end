@@ -7,6 +7,7 @@ const {
   checkUnusedUsername,
   checkPassword,
   hashPass,
+  rehashPass,
   checkToken
 } = require('./auth-middleware');
 
@@ -14,7 +15,11 @@ const {
   verifyPayload
 } = require('./../components/users/users-middleware')
 
-router.post('/register', checkUnusedUsername, hashPass, verifyPayload, async (req, res, next) => {
+router.post('/register', 
+checkUnusedUsername, 
+hashPass, 
+verifyPayload, 
+async (req, res, next) => {
   /*
   IMPLEMENT
   You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -83,7 +88,24 @@ router.post('/login',
   } catch (err) {
     next(err);
   }
-
+  
 });
+
+
+router.put('/:user_id/info',
+// checkToken,
+// rehashPass,
+async (req, res, next) =>{
+  const { user_id } = req.params
+  const [ changes ] = req.body;
+  try {
+    console.log(user_id)
+    console.log(changes)
+    res.status(301).json( await User.update(user_id, changes))
+  } catch (err){
+    next(err)
+  }
+
+})
 
 module.exports = router;
